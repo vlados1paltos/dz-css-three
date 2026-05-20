@@ -1,0 +1,176 @@
+<!-- 
+(Основное задание)
+Создал html-документ с несколькими элементами:
+контейнерами div, заголовком h1, и параграфами p.
+-->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grey</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header__container">
+
+            <div class="header__logo">
+                <a href="#" class="header__logo-link">
+                    Логотип
+                </a>
+            </div>
+
+            <nav class="header__nav">
+                <ul class="header__nav-list">
+                    <li class="header__nav-item"><a href="#hwa" class="header__nav-link">О нас</a></li>
+                    <li class="header__nav-item"><a href="#nws" class="header__nav-link">Новости</a></li>
+                    <li class="header__nav-item"><a href="#mre" class="header__nav-link">Больше</a></li>
+                    <li class="header__nav-item"><a href="#scm" class="header__nav-link">Социальные сети</a></li>
+                </ul>
+            </nav>
+
+            <div class="header__search">
+                <form action="#" method="get" class="header__search-form">
+
+                    <label for="site-search" class="visually-hidden">
+                        Поиск по сайту
+                    </label>
+
+                    <input 
+                    id="site-search"
+                    type="search" 
+                    name="search"
+                    placeholder="Поиск по сайту..."
+                    class="header__search-input"
+                    >
+
+                    <button type="submit" class="header__search-button">Найти</button>
+
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <section id="hwa" class="hero">
+            <div class="container hero__container">
+
+                <div class="hero__content">
+
+                    <h1 class="hero__title">
+                        О нас
+                    </h1>
+
+                    <p class="hero__text">
+                        Таким образом, разбавленное изрядной долей эмпатии, рациональное мышление позволяет оценить значение переосмысления внешнеэкономических политик. 
+                        А ещё интерактивные прототипы формируют глобальную экономическую сеть и при этом — 
+                        смешаны с не уникальными данными до степени совершенной неузнаваемости, из-за чего возрастает их статус бесполезности. 
+                        Господа, семантический разбор внешних противодействий влечет за собой процесс внедрения и модернизации благоприятных перспектив. 
+                        Как принято считать, непосредственные участники технического прогресса разоблачены. 
+                        Таким образом, существующая теория требует анализа соответствующих условий активизации.
+                    </p>
+
+                    <button type="button" class="hero__button">Присоединиться</button>
+
+                </div>
+
+                <div class="hero__image">
+                    <img 
+                    src="./assets/image/seryy_london.jpg" 
+                    alt="Серый лондон"
+                    width="1920"
+                    height="1080"
+                    >
+                </div>
+
+            </div>
+        </section>
+
+        <section id="nws" class="news">
+            <div class="container news__container">
+
+                <article class="news__article">
+
+                    <h2 class="news__article-title">
+                        Новости
+                    </h2>
+
+                    <p class="news__article-text">
+                        Кстати, диаграммы связей разоблачены. Современные технологии достигли такого уровня, 
+                        что убеждённость некоторых оппонентов позволяет выполнить важные задания по разработке системы обучения кадров, соответствующей насущным потребностям. 
+                        С другой стороны, начало повседневной работы по формированию позиции требует определения и уточнения поэтапного и последовательного развития общества. 
+                        Но консультация с широким активом влечет за собой процесс внедрения и модернизации экспериментов, поражающих по своей масштабности и грандиозности. 
+                        Однозначно, непосредственные участники технического прогресса описаны максимально подробно. Идейные соображения высшего порядка, 
+                        а также новая модель организационной деятельности не оставляет шанса для существующих финансовых и административных условий. 
+                        В своём стремлении улучшить пользовательский опыт мы упускаем, что активно развивающиеся страны третьего мира подвергнуты целой серии независимых исследований.
+                    </p>
+
+                </article>
+
+            </div>
+        </section>
+
+        <section id="mre" class="more">
+            <div class="container more__container">
+
+                 <h2 class="more__title">
+                    Больше
+                </h2>
+
+                <p class="more__text">
+                    Значимость этих проблем настолько очевидна, что экономическая повестка сегодняшнего дня требует от нас анализа поставленных обществом задач. 
+                    Как уже неоднократно упомянуто, интерактивные прототипы объединены в целые кластеры себе подобных. 
+                    Лишь независимые государства, инициированные исключительно синтетически, преданы социально-демократической анафеме. Картельные сговоры не допускают ситуации, 
+                    при которой представители современных социальных резервов формируют глобальную экономическую сеть и при этом — ограничены исключительно образом мышления. 
+                    В своём стремлении улучшить пользовательский опыт мы упускаем, что сделанные на базе интернет-аналитики выводы являются только методом политического участия и обнародованы.
+                </p>
+
+            </div>
+        </section>
+
+        <section class="promo">
+            <div class="container promo__container">
+
+                <h2 class="promo__title">
+                    Промо
+                </h2>
+
+                <p class="promo__text">
+                    В своём стремлении улучшить пользовательский опыт мы упускаем, 
+                    что сделанные на базе интернет-аналитики выводы являются только методом политического участия и обнародованы.
+                </p>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+
+        <div class="container footer__container">
+
+            <div class="footer__download">
+                <button type="button" class="footer__download-button">Загрузить приложение</button>
+            </div>
+
+            <div id="scm" class="footer__social">
+                <ul class="footer__social-list">
+                    <li class="footer__social-item"><a href="#" class="footer__social-link">VK</a></li>
+                    <li class="footer__social-item"><a href="#" class="footer__social-link">X</a></li>
+                    <li class="footer__social-item"><a href="#" class="footer__social-link">Discord</a></li>
+                    <li class="footer__social-item"><a href="#" class="footer__social-link">YouTube</a></li>
+                </ul>
+            </div>
+
+            <div class="footer__license">
+                <small class="footer__license-text">
+                    © 2020-2026, Компания такая-то, Inc., наш Такой-то продукт и все связанные с ними логотипы являются товарными знаками, 
+                    знаками обслуживания и/или зарегистрированными товарными знаками Компания такая-то, Inc.
+                </small>
+            </div>
+
+        </div>
+    </footer>
+</body>
+</html>

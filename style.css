@@ -1,0 +1,573 @@
+/* 
+(Отдельно)
+Так как с html и БЭМ на курсе я базово "подразобрался", следующей задачей ставлю для себя так же "подразобраться" и c CSS.
+Для ускорения этого процесса каждое используемое мной свойство в коде будет комментироваться.
+В свою очередь, для вашего удобства в проверке моего дз, в коде будут присутствовать старые добрые пометки вида:
+(Основное задание), (Задание на исследование), (Дополнительное задание).
+Прошу прощение за небольшое лирическое отступление (просто не хочется вас путать излишними комментариями, написанными в виде заметок для себя).
+*/
+
+/* 
+Задал обнуляющие стили для всей страницы и для псевдоэлементов(before, after).
+Использовал свойство box-sizing: border-box; для предсказуемости поведения элементов на странице.
+Далее убрал все внешние отступы браузера через margin: 0;
+И затем убрал все внутренние отступы браузера через padding: 0;
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 
+Установил базовый размер шрифта документа через font-size: 16px;
+Включил плавный скролл страницы через свойство scroll-behavior: smooth;
+*/
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+/* 
+Определил шрифт текста всей страницы через font-family: 'Times New Roman', Times, serif;
+Задал высоту строки с помощью line-height: 1.5;
+Чтобы на белом фоне не резало глаза, задал цвет текста не абсолютно черным, а #222 через color: #222;
+Сделал цвет фона фиксированно белым под все браузеры через свойство background-color: #fff;
+*/
+body {
+    font-family: 'Times New Roman', Times, serif;
+    line-height: 1.5;
+    color: #222;
+    background-color: #fff;
+}
+
+/* 
+(Основное задание 1) - здесь есть %, px.
+Задал ширину контейнера в 90%(width: 90%;). Это удобно, так как по бокам остаются отступы по 5% и это смотрится лучше.
+Однако на больших экранах это выглядит слишком широко, 
+для исправления этой проблемы я задаю максимально допустимую ширину в 1200px(max-width: 1200px;).
+Использую внешний отступ элемента вида margin: 0 auto;, 
+то есть top/bottom 0, left/right auto(браузер автоматически вычисляет свободное пространство 
+и распределяет его поровну слева и справа, в результате чего элемент центрируется).
+*/
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 
+Utility класс. 
+Для того, чтобы скрыть элемент я сначала убираю его из normal document flow при помощи position: absolute;
+Иначе этот невидимый элемент будет ломать верстку.
+Уменьшил ширину почти до нуля(width: 1px;), потому что некоторые скринридеры плохо работают с полностью нулевыми размерами.
+То же самое для высоты(height: 1px;).
+Затем сдвинул элемент за пределы видимой области(margin: -1px;). Это дополнительная страховка сокрытия элемента.
+Использовал padding: 0; для того, чтобы убрать внутренние отступы, тогда элемент не станет больше каким-либо образом.
+Использовал overflow: hidden; для того, чтобы скрывать все, что выходит за границы элемента.
+Использовал border: 0; для того, чтобы элемент не отображался визуально.
+Использовал clip-path: inset(100%); для того, чтобы обрезать область отображения элемента.
+Использовал white-space: nowrap; для того, чтобы запретить перенос текста.
+*/
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    clip-path: inset(100%);
+    white-space: nowrap;
+}
+
+/* 
+(Основное задание 1) - здесь есть px.
+Стили для header.
+Использовал внутренний отступ элемента(padding: 20px 0;). Означает top/bottom = 20px, left/right = 0;
+Задал фон для header цвета light grey(background: #f2f2f2;), чтобы он не сливался со страницей.
+*/
+.header {
+    padding: 20px 0;
+    background: #f2f2f2;
+}
+
+/* 
+Превратил весь элемент header__container в flex контейнер с помощью display: flex;
+Это свойство не просто ставит в ряд все блоки, оно так же дает ряд преимуществ позволяя:
+выстраивать элементы в строку или колонку, делать выравнивание, распределять свободное место, 
+задавать расстояния, растягивать элементы, менять порядок элементов.
+К нему я добавил еще два свойства:
+1) align-items: center; - оно позволяет выровнять элементы по поперечной оси, конкретно тут(center) создает выравнивание по центру.
+2) justify-content: space-between; - оно позволяет выровнять элементы по главной оси, конкретно тут(space-between) создает равные промежутки между элементами. 
+Использовал gap: 24px; - для того, чтобы добавить расстояние между flex элементами в 24px.
+*/
+.header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+/* 
+Использовал flex-shrink: 0; для того, чтобы запретить сжатие элемента(потому что на маленьких экранах logo может уменьшаться, переноситься и т.п.).
+*/
+.header__logo {
+    flex-shrink: 0;
+}
+
+/* 
+Задал размер шрифта логотипа при помощи font-size: 1.25rem;, что равнозначно 20px.
+Задал толщину шрифта в 700(bold) при помощи font-weight: 700;
+Цвет логотипа color: #222;
+Убрал underline у ссылки при помощи text-decoration: none;
+*/
+.header__logo-link {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #222;
+    text-decoration: none;
+}
+
+/* 
+Некоторые классы я оставил пустыми, 
+добавляю их все через комбинацию: 
+ctrl+h, ввод class="([^"]*)", 
+alt+r, ctrl+shift+l для выделения, 
+копирую все классы и вставляю в css, 
+затем через мультикурсор(alt+left click) их быстренько подстраиваю под написание css.
+*/
+.header__nav {
+
+}
+
+/* 
+Использовал list-style: none; для того, чтобы убрать точки у навигации.
+*/
+.header__nav-list {
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.header__nav-item {
+
+}
+
+/* 
+Задал цвет color: #222;
+Убрал underline через text-decoration: none;
+*/
+.header__nav-link {
+    color: #222;
+    text-decoration: none;
+}
+
+/* 
+Здесь я использовал псевдокласс hover, он срабатывает когда курсор наведен.
+То есть при наведении underline возвращается(text-decoration: underline;).
+*/
+.header__nav-link:hover {
+    text-decoration: underline;
+}
+
+.header__search {
+
+}
+
+.header__search-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 
+(Основное задание 1) - здесь есть vw.
+Использовал width: 16vw; увеличив тем самым ширину поля поиска. Здесь 16vw - это 16% от ширины видимой части сайта(viewport).
+Запретил элементу становиться уже 160px(min-width: 160px;), без этого input мог бы стать нечитаемым, особенно на мобилках.
+Добавил внутренние отступы выбрав для этого em. Он зависит от font-size текущего элемента. 
+Если у нас font-size: 16px, то тут 0.5em = 8px, а 0.75em = 12px.
+Это хорошо для форм, padding масштабируется вместе с текстом.
+Далее я задал рамку input -  border: 1px solid #ccc;, где есть толщина, тип линии и ее цвет.
+Задал скругление рамке в 6px(border-radius: 6px;).
+*/
+.header__search-input {
+    width: 16vw;
+    min-width: 160px;
+    padding: 0.5em 0.75em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* 
+Убрал default рамку браузера через - border: none;
+Скруглил кнопку(border-radius: 6px;).
+Использовал cursor: pointer; для того, что бы при наведении на кнопку курсор изменялся на руку-указатель.
+Задал фон(background-color:#cacaca;).
+*/
+.header__search-button {
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color:#cacaca;
+}
+
+/* 
+Стили для main.
+*/
+.main {
+
+}
+
+/* 
+(Основное задание 3) - здесь есть vh.
+Блок hero. 
+Задал ему минимальную высоту секции min-height: 70vh; для того, чтобы hero занимал большую часть экрана.
+Как пример тут использован vh. Значение 70vh означает 70% высоты viewport.
+Использовал padding: 60px 0; для того, что бы контент не прилипал к краям.
+*/
+.hero {
+    min-height: 70vh;
+    padding: 60px 0;
+}
+
+.hero__container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+/* 
+(Задание на исследование 1.2 и вывод) - вместо привычных px использовал %.
+Задал width: 50%;. То есть теперь контентная колонка hero занимает половину контейнера.
+Вывод:
+Абсолютные единицы позволяют задавать фиксированные размеры элементов, 
+а относительные помогают создавать гибкие и адаптивные интерфейсы.
+*/
+.hero__content {
+     width: 50%;
+}
+
+/* 
+(Основное задание 2) - здесь есть em и rem.
+Для главного заголовка использовал margin: 0 0 0.5em;
+А также font-size: 2.5rem;
+*/
+.hero__title {
+    margin: 0 0 0.5em;
+    font-size: 2.5rem;
+}
+
+.hero__text {
+    margin: 0 0 1.5em;
+    font-size: 1rem;
+}
+
+/* 
+(Основное задание 4.1) - начало.
+Применил transition: transform 0.3s ease; для плавности анимации transform.
+По сути transition говорит браузеру - анимируй изменение transform.
+Длительность анимации - 0.3s, тип ease(обозначает скорость анимации, тут это медленно-быстро-медленно).
+Без ease анимации выглядят дергано и механически.
+*/
+.hero__button {
+    padding: 0.75em 1.25em;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/*
+(Основное задание 4.2) - продолжение. Тут я применил саму анимацию.
+Задал кнопке поворот при помощи transform: rotate(3deg);
+transform - это css свойство для визуального преобразования элемента.
+rotate(3deg) означает, что браузер повернет(rotate) элемент на 3 градуса(3deg) по часовой стрелке.
+Благодаря hover это происходит при наведении курсора.
+*/
+.hero__button:hover {
+    transform: rotate(3deg);
+}
+
+/* 
+Колонку изображения прописал в 50% ширины контейнера width: 50%;.
+*/
+.hero__image {
+    width: 50%;
+}
+
+.hero__image img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* 
+Блок news. 
+Задал внутренние отступы сверху и снизу(padding: 50px 0;).
+Задал цвет фона(background-color: #fafafa;).
+*/
+.news {
+    padding: 50px 0;
+    background-color: #fafafa;
+}
+
+.news__container {
+
+}
+
+.news__article {
+
+}
+
+/* 
+(Задание на исследование 1.1) - изменил привычные px на em.
+Задал внешний отступ только снизу(margin: 0 0 0.5em;), тем самым отделив заголовок от текста.
+Задал размер шрифта(font-size: 2rem;). Если html = 16px, то 2rem = 32px.
+*/
+.news__article-title {
+    margin: 0 0 0.5em;
+    font-size: 2rem;
+}
+
+/* 
+Убрал стандартные отступы абзаца(margin: 0;).
+Задал базовый размер текста font-size: 1rem;.
+*/
+.news__article-text {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* 
+Блок more. 
+Задал вертикальные внутренние отступы(padding: 50px 0;).
+Так же задал фоновый цвет background-color: #cacaca;.
+*/
+.more {
+    padding: 50px 0;
+    background-color: #cacaca;
+}
+
+.more__container {
+
+}
+
+.more__title {
+    margin: 0 0 0.5em;
+    font-size: 2rem;
+}
+
+.more__text {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* 
+(Дополнительное задание 1) - элемент с фоновым изображением, сделанный по заданию.
+Добавил фоновое изображение - background-image: url("./assets/image/background.jpg");
+Запретил его повторение - background-repeat: no-repeat;
+Расположил по центру.
+Указал размер в виде background-size: 100%;
+Добавил цвет фона, если изображение вдруг не загрузится(background-color: #cacaca;).
+*/
+.promo {
+    padding: 60px 0;
+    background-image: url("./assets/image/background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    background-color: #cacaca;
+    min-height: 50vh;
+}
+
+.promo__container {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.promo__title {
+    font-size: 2rem;
+}
+
+.promo__text{
+    max-width: 700px;
+    font-size: 1rem;
+}
+
+/* 
+Стили для footer.
+Сделал внутренние отступы сверху/снизу, чтобы footer не выглядел сжатым(padding: 30px 0;).
+Задал белый цвет тексту(color: #fff;).
+Затем темный фон(background-color: #222;).
+*/
+.footer {
+    padding: 30px 0;
+    color: #fff;
+    background-color: #222;
+}
+
+/* 
+Использовал display: flex;
+Задал flex-direction: column;, чтобы блоки шли сверху вниз.
+Использовал расстояние между элементами в 20px(gap: 20px;).
+*/
+.footer__container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footer__download {
+
+}
+
+.footer__download-button {
+    padding: 0.75em 1.25em;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.footer__social {
+
+}
+
+/* 
+Использовал list-style: none; для того, чтобы убрать маркеры списка.
+*/
+.footer__social-list {
+    display: flex;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.footer__social-item {
+
+}
+
+/* 
+Сделал белый цвет ссылке(color: #fff;).
+Убрал underline при помощи text-decoration: none;
+*/
+.footer__social-link {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* 
+Снова использовал hover, при наведении снова появляется подчеркивание.
+*/
+.footer__social-link:hover {
+    text-decoration: underline;
+}
+
+.footer__license {
+
+}
+
+/* 
+Сделал элемент блочным при помощи display: block; Это нужно, чтобы текст занял отдельную строку.
+Уменьшил размер текста при помощи font-size: 0.875rem; Это делается для второстепенной важности информации.
+Сам rem зависит от размера шрифта корневого элемента html, у меня это 16px. 1rem = 16px, у меня тут 0.875 = 14px.
+*/
+.footer__license-text {
+    display: block;
+    font-size: 0.875rem;
+}
+
+/* 
+Пробую себя в адаптивность.
+Для начала создаю медиазапрос.
+Он говорит браузеру применять эти стили только тогда, когда ширина viewport(видимой на конкретном экране части сайта) 768px или меньше.
+*/
+@media (max-width: 768px) {
+
+    /* 
+    Здесь header перестраивается из строки в колонку. 
+    Лого, меню и поиск становятся друг под другом.
+    */
+    .header__container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* 
+    Пункты меню становятся вертикальными.
+    */
+    .header__nav-list {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* 
+    Поле поиска занимает 60% ширины viewport.
+    */
+    .header__search-input {
+        width: 60vw;
+    }
+
+    /* 
+    Hero больше не обязан занимать фиксированную минимальную высоту.
+    */
+    .hero {
+        min-height: auto;
+    }
+
+    /* 
+    Контент hero и картинка становятся друг под другом.
+    */
+    .hero__container {
+        flex-direction: column;
+    }
+
+    /* 
+    Оба блока занимают всю доступную ширину.
+    */
+    .hero__content,
+    .hero__image {
+        width: 100%;
+    }
+
+    /* 
+    Заголовок уменьшается на мобильных устройствах.
+    */
+    .hero__title {
+        font-size: 2rem;
+    }
+
+    /* 
+    (Дополнительное задание 2) - Написал код, который изменяет размеры элемента 
+    при изменении ширины окна браузера. Сделал через медиазапросы. Здесь есть и vw, и vh.
+    Здесь блок promo на мобильных устройствах становится выше,
+    а фоновое изображение масштабируется относительно ширины viewport.
+    */
+    .promo { 
+        min-height: 50vh;
+        background-size: 80vw;
+    }
+
+    /* 
+    Заголовок тут тоже уменьшается на мобильных устройствах.
+    */
+    .promo__title {
+        font-size: 1.75rem;
+    }
+
+    /* 
+    Соцсети в футере становятся вертикальным списком.
+    */
+    .footer__social-list {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
